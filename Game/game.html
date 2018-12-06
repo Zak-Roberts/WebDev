@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+    <script>
+
+        window.onload = function () {
+            document.getElementById("lives").innerHTML = "Lives : " + counter;
+        }
+        var image;
+        function initImage() {
+            image = document.getElementById("spaceship");
+            image.style.position = "relative";
+            image.style.left = "0px";
+            image.style.top = "0px";
+        }
+
+        function moveRight() {
+            if (parseInt(image.style.left) + 10 < 1000) {
+                image.style.left = parseInt(image.style.left) + 10 + "px";
+            }
+            else {
+                image.style.left = "0px";
+            }
+        }
+
+        function moveLeft() {
+            if (parseInt(image.style.left) - 10 > 0) {
+                image.style.left = parseInt(image.style.left) - 10 + "px";
+            }
+            else {
+                image.style.left = "1000px";
+            }
+        }
+
+        function moveUp() {
+            if (parseInt(image.style.top) - 10 > 0) {
+                image.style.top = parseInt(image.style.top) - 10 + "px";
+            }
+            else {
+                image.style.top = "1000px";
+            }
+        }
+
+        function moveDown() {
+            if (parseInt(image.style.top) + 10 < 1000) {
+                image.style.top = parseInt(image.style.top) + 10 + "px";
+            }
+            else {
+                image.style.top = "0px";
+            }
+        }
+
+        var myInt1;
+        var myInt2;
+        function createAsteroid() {
+            var asteroid = document.createElement("img");
+            asteroid.setAttribute("src", "asteroid.png");
+            asteroid.setAttribute("class", "asteroid");
+            asteroid.setAttribute("style", "position: absolute;");
+            asteroid.style.left = Math.floor(Math.random() * 1001) + "px";
+            asteroid.style.top = "0px";
+            document.getElementById("asteroidDiv").append(asteroid);
+            var myInt1 = setInterval(function () { moveAsteroid(asteroid) }, 20);
+            var myInt2 = setInterval(function () { collide(image, asteroid) }, 500);
+        }
+
+        function moveAsteroid(ast) {
+            ast.style.top = parseInt(ast.style.top) + 5 + "px";
+        }
+
+        function loseGame() {
+            clearInterval(myInt);
+            clearInterval(myInt1);
+            clearInterval(myInt2);
+            window.location.replace("gameOver.html");
+        }
+
+        let counter = 0;
+        function collide(image, asteroid) {
+            image = document.getElementById("spaceship");
+
+            astLeft = parseInt(asteroid.style.left);
+            astTop = parseInt(asteroid.style.top);
+            if (counter < 3) {
+                if ((parseInt(image.style.left) < astLeft + asteroid.width) &&
+                    (parseInt(image.style.left) + image.width > astLeft) &&
+                    (parseInt(image.style.top) < astTop + asteroid.height) &&
+                    (parseInt(image.style.top) + image.height > astTop)) {
+                    // stuff
+                    counter++;
+                }
+            }
+            else if (counter >= 3) {
+                if ((parseInt(image.style.left) < astLeft + asteroid.width) &&
+                    (parseInt(image.style.left) + image.width > astLeft) &&
+                    (parseInt(image.style.top) < astTop + asteroid.height) &&
+                    (parseInt(image.style.top) + image.height > astTop)) {
+                    // stuff
+                    loseGame();
+                }
+            }
+        }
+
+        document.onkeydown = function (e) {
+            switch (e.key) {
+                case 'ArrowUp':
+                    moveUp();
+                    break;
+                case 'ArrowDown':
+                    moveDown();
+                    break;
+                case 'ArrowLeft':
+                    moveLeft();
+                    break;
+                case 'ArrowRight':
+                    moveRight();
+                    break;
+            }
+        }
+
+        window.onload = initImage;
+        var myInt = setInterval(createAsteroid, 700);
+
+    </script>
+    <div id="lives"></div>
+    <div id="asteroidDiv" class="div1"></div>
+    <div id="shipDiv" class="div1">
+        <img id="spaceship" src="spaceship.png" />
+    </div>
+
+</body>
+
+</html>

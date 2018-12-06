@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        function createP() {
+            var p = document.createElement("p");
+            p.innerHTML = "Hello";
+            p.setAttribute("class", "changingP");
+            p.setAttribute("id", counter);
+            increment();
+            document.getElementById("divv").appendChild(p);
+            console.log(p);
+        }
+
+        function removeP() {
+            var divv = document.getElementById("divv");
+            divv.removeChild(divv.childNodes[document.getElementsByClassName("changingP").length - 1]);
+            decrement();
+            // // var changingP = document.getElementsByClassName("changingP");
+            // document.getElementById("divv").removeChild(document.getElementsByTagName("p"));
+        }
+
+        function editP() {
+            var changingP = document.getElementsByClassName("changingP");
+            var text = document.getElementById("textbox").value;
+            for (i = 0; i < changingP.length; i++) {
+                changingP[i].innerHTML = text;
+            }
+        }
+
+        function createPara() {
+            //var d = document.createElement("div");
+            var p = document.createElement("p");
+            //d.setAttribute("id", "d" + counter);
+            //d.setAttribute("style", "display:inline-block")
+            // d.innerHTML = "Hi";
+            // p.setAttribute("class", "changeP");
+            p.innerHTML = "Hello";
+            p.setAttribute("id", "p" + counter);
+            p.setAttribute("class", "changingP");
+            var button = createDeleteButton();
+            //document.getElementById("divv").appendChild(d);
+            //document.getElementById("d" + counter).appendChild(p);
+            //document.getElementById("d" + counter).appendChild(button);
+            document.getElementById("divv").appendChild(p);
+            document.getElementById("divv").appendChild(button);
+            increment();
+        }
+
+        function removePara(stuff) {
+
+            //var node = document.getElementById("p"+counter);
+            //document.getElementById("divv").removeChild(node);
+            //var node = document.getElementById("b"+counter);
+            //document.getElementById("divv").removeChild(node);
+            var node = document.getElementById("p"+stuff);
+            document.getElementById("divv").removeChild(node);
+            var node = document.getElementById("b"+stuff);
+            document.getElementById("divv").removeChild(node);
+
+            decrement();
+        }
+
+        function createDeleteButton() {
+            var button = document.createElement("input");
+            button.setAttribute("type", "button");
+            button.setAttribute("value", "Delete THIS paragraph");
+            button.setAttribute("id", "b" + counter);
+            button.setAttribute("onclick", "removePara("+counter+")");
+            return button;
+        }
+
+        var counter = 1;
+        function increment() {
+            counter += 1;
+            return counter;
+        }
+        function decrement() {
+            counter -= 1;
+            return counter;
+        }
+    </script>
+
+    <!-- <input type="button" onclick="createP()" value="Create paragraph" />
+    <input type="button" onclick="removeP()" value="Delete paragraph" />   -->
+    <!-- <input id="demo" type="button" onclick="editP()" value="Edit paragraph" /> -->
+
+    <input type="button" onclick="createPara()" value="Create paragraph" />
+    <!-- <input type="button" onclick="removePara()" value="Delete paragraph" /> -->
+
+    <br/>
+    <br/>
+    <input id="textbox" type="text" placeholder="text..." onkeyup="editP()" alt="Enter text: " />
+    <!-- <button type="submit" onclick="editP()">Submit Text</button> -->
+
+    <div id="divv"></div>
+
+</body>
+
+</html>
+
+<!--
+    get changingP class length
+    display delete button as paragraph is made
+    link delete button to index of changingP
+-->

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <script>
+        var kings
+        var requestURL = 'https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/kings.json';
+        var request = new XMLHttpRequest();
+        request.open('GET', requestURL);
+        request.responseType = 'json'
+        request.send();
+        function searchKingName() {
+            kings = request.response;
+            document.getElementById("div").innerHTML = "";
+            text = document.getElementById("name").value;
+            text = text.toUpperCase();
+            var p;
+            table = document.createElement("table" + counter);
+            table.setAttribute("id", "kingTable");
+            table.innerHTML = "<tr><th>Name</th> <br> </tr><tr> <td> <br>";
+            for (king in kings) {
+                array = Object.values(kings[king]);
+                if (array[0].toUpperCase().includes(text)) {
+                    table.innerHTML += "<td> <tr>" + array[0] + "</td> </tr> <br>";
+                    document.getElementById("div").appendChild(table);
+                    increment();
+                }
+            }
+        }
+
+        var counter = 0;
+        function increment() {
+            counter += 1;
+            return counter;
+        }
+    </script>
+
+    <h1>Monarch Search</h1>
+
+    <p> Enter a name to seach:
+        <input id="name" type="textbox" onkeyup="searchKingName()" placeholder="name..." /><br />
+        <!-- Enter a house to search:
+        <input id="house" type="textbox" onkeyup="searchKingHouse()" placeholder="house..." /> -->
+    </p>
+    <div id="div"></div>
+</body>
+
+</html>

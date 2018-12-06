@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+
+      // Basic writing to a webpage
+      var x = "<h1>Hello!</h1>";
+      document.write(x);
+      window.alert(x);
+      console.log(x);   // good for debugging, unintrusive
+
+      // Function within a function
+      function addition(a,b){
+        function add(){
+          return a+b;
+        }
+        return add();
+      }
+      window.alert(addition(4,3));
+
+      // Returning stuff from a function
+      function function1(){
+        {var a = 5}
+      console.log(a);
+      }
+      function1();
+
+      // Maker function
+      function maker(name, grade, level) {
+        var it = {};
+        it.name = name;
+        it.grade = grade;
+        it.level = level;
+        return it;
+      }
+var myObject = maker("Jack", "A", 3);
+console.log(myObject);
+
+      // conditionals 
+      var a = new Object();
+      a.name = "Bob";
+      a.job = "Trainer";
+      console.log(a.name || a.job);
+
+    </script>
+  </body>
+</html>

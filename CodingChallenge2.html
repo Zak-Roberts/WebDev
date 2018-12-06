@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <script>
+    function square(num) {
+      return num * num;
+    }
+
+    function squareNum(num) {
+      alert(num * num);
+    }
+
+
+    console.log(square(5));
+
+    function sum(num1, num2, num3) {
+      return num1 + num2 + num3;
+    }
+
+    console.log(sum(1, 2, 3));
+
+    function Person(name, age, occupation) {
+      var it = {};
+      it.name = name;
+      it.age = age;
+      it.occupation = occupation;
+
+      return it;
+    }
+
+    var person1 = new Person("Zak", 22, "Trainee");
+    console.log(person1);
+    person1.name = "Jim";
+    console.log(person1);
+
+    function ageIncrease(Person) {
+      Person.age += 1;
+      alert(Person.name + " had a birthday and is now " + Person.age + " years old");
+    }
+
+    var i = 0;
+    function increment() {
+      i += 1;
+      document.getElementById("i").innerHTML = i;
+    }
+  </script>
+
+  <input type="button" onclick="squareNum(5)" value="Square 5" />
+  <input type="button" onclick="ageIncrease(person1)" value="Increase Age" />
+  <input type="button" onclick="increment()" value="Click me" />
+  <p id="i">0</p>
+</body>
+
+</html>

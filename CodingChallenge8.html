@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        var superHeroes
+        var requestURL = 'https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/example.json';
+        var request = new XMLHttpRequest();
+        request.open('GET', requestURL);
+        request.responseType = 'json'
+        request.send();
+        request.onload = function () {
+            superHeroes = request.response;
+            //do stuff with superHeroes
+            console.log(superHeroes);
+
+            for (key in superHeroes) {
+                if (superHeroes[key] instanceof Object) {    // superHeroes -> members
+                    document.getElementById("demo").innerHTML += key + ": <br>";
+                    for (subkey in superHeroes[key]) {
+                        if (superHeroes[key][subkey] instanceof Object) {
+                            for (subsubkey in superHeroes[key][subkey]) {   // superHeroes -> members -> array
+                                if (superHeroes[key][subkey][subsubkey] instanceof Object) {
+                                    document.getElementById("demo").innerHTML += "<br>  " + subsubkey + ":";
+                                    for (subsubsubkey in superHeroes[key][subkey][subsubkey]) { // superHeroes -> members -> array -> powers
+                                        document.getElementById("demo").innerHTML += "<br>      " + superHeroes[key][subkey][subsubkey][subsubsubkey];
+                                    }
+                                    document.getElementById("demo").innerHTML += "<br>";
+                                }
+                                else {
+                                    document.getElementById("demo").innerHTML += "<br>  " + subsubkey + ": " + superHeroes[key][subkey][subsubkey];
+                                }
+                                // document.getElementById("demo").innerHTML += "<br>" + subsubkey + ": " + superHeroes[subsubkey] + "<br>";
+                            }
+                        }
+                        else {
+                            document.getElementById("demo").innerHTML += "<br>  " + subkey + ": " + superHeroes[key][subkey];
+                        }
+                    }
+                }
+                else {
+                    document.getElementById("demo").innerHTML += key + ": " + superHeroes[key] + "<br>";
+                }
+            }
+        }
+    </script>
+    <pre>
+    <p id="demo"></p>
+    </pre>
+</body>
+
+</html>

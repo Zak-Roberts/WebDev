@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        function Person(name, age, occupation) {
+            var it = {};
+            it.name = name;
+            it.age = age;
+            it.occupation = occupation;
+
+            return it;
+        }
+
+        function ageGroup() {
+            // if (zak.age >= 20 && zak.age <= 40) {
+            //     alert("Not retired");
+            // }
+            // else{
+            //     alert("Retired");
+            // }
+            alert(zak.age>20 ? (zak.age > 40 ? "Retired":"Not retired"):"Too young");
+        }
+
+        var zak = new Person("Zak", 43, "Trainee");
+        ageGroup();
+        zak.age = 22;
+        ageGroup();
+        zak.age = 19;
+        ageGroup();
+    </script>
+
+</body>
+
+</html>
